@@ -24,7 +24,7 @@ class Matrix {
   vector<T>& operator[](size_t i) { return matrix[i]; }
   const vector<T>& operator[](size_t i) const{ return matrix[i]; }
   //Matrix<T>& operator=(const Matrix<T>& diffMatrix) = default;
-  Matrix<T> operator+(Matrix<T>& diffMatrix) {
+  Matrix<T> operator+(const Matrix<T>& diffMatrix) {
     if (!sameSize(diffMatrix)) { throw invalid_argument("Error: the dimensional problem occurred\n"); }
     Matrix<T> new_matrix(m, n);
     for (int i = 0; i < m; i++)
@@ -32,7 +32,7 @@ class Matrix {
         new_matrix[i][j] = matrix[i][j] + diffMatrix[i][j];
     return new_matrix;
   }
-  Matrix<T> operator-(Matrix<T>& diffMatrix) {
+  Matrix<T> operator-(const Matrix<T>& diffMatrix) {
     if (!sameSize(diffMatrix)) throw invalid_argument("Error: the dimensional problem occurred\n");
     Matrix<T> new_matrix(m, n);
     for (int i = 0; i < m; i++)
@@ -40,7 +40,7 @@ class Matrix {
         new_matrix[i][j] = matrix[i][j] - diffMatrix[i][j];
     return new_matrix;
   }
-  Matrix<T> operator*(Matrix<T>& diffMatrix) {
+  Matrix<T> operator*(const Matrix<T>& diffMatrix) {
     if (diffMatrix.m != n) throw invalid_argument("Error: the dimensional problem occurred\n");
     Matrix<T> new_matrix(m, diffMatrix.n);
     for (int i = 0; i < m; i++) {
@@ -81,7 +81,7 @@ class IdentityMatrix: public SquareMatrix<T> {
   }
 };
 
-Matrix<ll> power(Matrix<ll> A, ll n) {
+Matrix<ll> power(const Matrix<ll>& A, ll n) {
   if (n == 0) return IdentityMatrix<ll>(A.getM());
   auto u = power(A, n/2);
   u = u * u;
