@@ -17,8 +17,6 @@ class Matrix {
   public:
   Matrix(size_t m, size_t n): n(n), m(m) { matrix.resize(m, vector<T>(n)); };
   Matrix(const IdentityMatrix<T>& diffMatrix): matrix(diffMatrix.matrix), n(diffMatrix.n), m(diffMatrix.m) { }
-  Matrix(Matrix& matrix) = default;
-  ~Matrix() = default;
 
   bool sameSize(Matrix<T>& diffMatrix) { return diffMatrix.m == m && diffMatrix.n == n; }
   vector<T>& operator[](size_t i) { return matrix[i]; }
